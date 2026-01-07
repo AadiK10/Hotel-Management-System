@@ -1,0 +1,19 @@
+# ===== GENERAL =====
+.metadata/
+.DS_Store
+
+# ===== NODE / REACT =====
+hotel-ui/node_modules/
+hotel-ui/build/
+hotel-ui/.env
+
+# ===== JAVA / SPRING =====
+hotelmanagement/target/
+hotelmanagement/.classpath
+hotelmanagement/.project
+hotelmanagement/.settings/
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.iml
