@@ -25,7 +25,6 @@ This project is designed to demonstrate **full-stack development skills**, clean
 - Delete users
 - Add rooms
 - View all rooms
-- Manage hotel data
 
 ## 🧑‍💼 Receptionist Features
 - View rooms
