@@ -18,13 +18,13 @@ public class ReceptionistUserController {
         this.userRepo = userRepo;
     }
 
-    // ✅ View users (READ ONLY)
+    // View users (READ ONLY)
     @GetMapping
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
-    // ✅ Update basic user details (NO roles, NO delete)
+    // Update basic user details 
     @PutMapping("/{id}")
     public User updateUser(
             @PathVariable Long id,
