@@ -18,13 +18,13 @@ public class AdminUserController {
         this.userRepo = userRepo;
     }
 
-    // ✅ View all users
+    // View all users
     @GetMapping
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
-    // ✅ Delete user
+    // Delete user
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepo.deleteById(id);
