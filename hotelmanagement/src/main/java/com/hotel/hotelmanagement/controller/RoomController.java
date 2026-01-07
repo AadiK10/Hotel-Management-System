@@ -17,13 +17,13 @@ public class RoomController {
         this.roomRepo = roomRepo;
     }
 
-    // ✅ View all rooms (ALL roles)
+    // View all rooms (ALL roles)
     @GetMapping
     public List<Room> getAllRooms() {
         return roomRepo.findAll();
     }
 
-    // ✅ Add room (ADMIN only)
+    // Add room (ADMIN only)
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public Room addRoom(@RequestBody Room room) {
