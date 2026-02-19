@@ -12,6 +12,7 @@ hotelmanagement/target/
 hotelmanagement/.classpath
 hotelmanagement/.project
 hotelmanagement/.settings/
+employee-management/
 
 # ===== IDE =====
 .vscode/
