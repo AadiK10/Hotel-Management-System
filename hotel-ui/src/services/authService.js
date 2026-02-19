@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode";
+
 const API_URL = "http://localhost:8080/api/auth";
 
 export const login = async (email, password) => {
@@ -16,5 +18,37 @@ export const login = async (email, password) => {
     throw new Error("Login failed");
   }
 
-  return response.text(); // JWT token
+  const token = await response.text();
+  
+  localStorage.setItem("token", token);
+  
+  try {
+    const profileResponse = await fetch(`${API_URL}/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    
+    if (profileResponse.ok) {
+      const userData = await profileResponse.json();
+      if (userData && userData.username) {
+        localStorage.setItem("username", userData.username);
+      } else {
+        
+        const username = email.split('@')[0];
+        localStorage.setItem("username", username);
+      }
+    } else {
+      
+      const username = email.split('@')[0];
+      localStorage.setItem("username", username);
+    }
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    
+    const username = email.split('@')[0];
+    localStorage.setItem("username", username);
+  }
+  
+  return token;
 };

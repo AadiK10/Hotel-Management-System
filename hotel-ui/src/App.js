@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -9,15 +10,23 @@ import CustomerDashboard from "./pages/CustomerDashboard";
 import Rooms from "./pages/Rooms";
 import AddRoom from "./pages/AddRoom";
 import ManageUsers from "./pages/ManageUsers";
-
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
 import EditUser from "./pages/EditUser";
 import ReceptionUsers from "./pages/ReceptionUsers";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./styles/main.css";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
 
 function AppContent() {
   const location = useLocation();
@@ -29,33 +38,96 @@ function AppContent() {
   return (
     <>
       <Navbar />
-
-      {}
       <div className="main-content">
         <Routes>
+          {/* Public Routes - No protection needed */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/reception" element={<ReceptionDashboard />} />
-          <Route path="/customer" element={<CustomerDashboard />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/add-room" element={<AddRoom />} />
-          <Route path="/manage-users" element={<ManageUsers />} />
-          <Route path="/reception-users" element={<ReceptionUsers />} />
-          <Route path="/edit-user/:id" element={<EditUser />} />
+          
+          {/* Protected Routes - Require authentication */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/reception" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN", "ROLE_RECEPTIONIST"]}>
+                <ReceptionDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/customer" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN", "ROLE_RECEPTIONIST", "ROLE_CUSTOMER"]}>
+                <CustomerDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/rooms" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN", "ROLE_RECEPTIONIST", "ROLE_CUSTOMER"]}>
+                <Rooms />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/add-room" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+                <AddRoom />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/manage-users" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+                <ManageUsers />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/reception-users" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN", "ROLE_RECEPTIONIST"]}>
+                <ReceptionUsers />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/edit-user/:id" 
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN", "ROLE_RECEPTIONIST"]}>
+                <EditUser />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </div>
-
       {!hideFooter && <Footer />}
     </>
   );
 }
 
-
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AppContent />
     </BrowserRouter>
   );
