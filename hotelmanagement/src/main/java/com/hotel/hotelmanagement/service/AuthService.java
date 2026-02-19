@@ -39,7 +39,7 @@ public class AuthService {
     }
 
     public void register(RegisterRequest req) {
-
+    	
     	Role role = roleRepo.findByName(req.role)
     	        .orElseGet(() -> {
     	            Role newRole = new Role();
@@ -47,7 +47,7 @@ public class AuthService {
     	            return roleRepo.save(newRole);
     	        });
 
-
+    	
         User user = new User();
         user.setUsername(req.username);
         user.setEmail(req.email);
