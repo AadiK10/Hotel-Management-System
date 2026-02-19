@@ -16,7 +16,7 @@ function ManageUsers() {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/admin/users", {
+      const res = await fetch("https://hotel-management-system-production-08d9.up.railway.app/api/admin/users", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -34,7 +34,7 @@ function ManageUsers() {
   const deleteUser = async (id) => {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/admin/users/${id}`,
+        `https://hotel-management-system-production-08d9.up.railway.app/api/admin/users/${id}`,
         {
           method: "DELETE",
           headers: {

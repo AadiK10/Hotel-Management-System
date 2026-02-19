@@ -17,7 +17,7 @@ function ReceptionUsers() {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/reception/users", {
+      const res = await fetch("https://hotel-management-system-production-08d9.up.railway.app/api/reception/users", {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -53,7 +53,7 @@ function ReceptionUsers() {
   const saveUser = async () => {
     setSaveLoading(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/reception/users/${editingUser.id}`, {
+      const res = await fetch(`https://hotel-management-system-production-08d9.up.railway.app/api/reception/users/${editingUser.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

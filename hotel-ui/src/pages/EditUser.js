@@ -24,7 +24,7 @@ function EditUser() {
 
   const fetchUserData = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/api/admin/users`, {
+      const res = await fetch(`https://hotel-management-system-production-08d9.up.railway.app/api/admin/users`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const users = await res.json();
@@ -58,7 +58,7 @@ function EditUser() {
     setError("");
 
     try {
-      const res = await fetch(`http://localhost:8080/api/reception/users/${id}`, {
+      const res = await fetch(`https://hotel-management-system-production-08d9.up.railway.app/api/reception/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

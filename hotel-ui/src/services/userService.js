@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/users";
+const API_URL = "https://hotel-management-system-production-08d9.up.railway.app/api/users";
 
 const getToken = () => localStorage.getItem("token");
 

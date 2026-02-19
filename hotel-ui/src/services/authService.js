@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
-const API_URL = "http://localhost:8080/api/auth";
+const API_URL = "https://hotel-management-system-production-08d9.up.railway.app/api/auth";
 
 export const login = async (email, password) => {
   const response = await fetch(`${API_URL}/login`, {
